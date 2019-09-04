@@ -1,0 +1,7 @@
+- name: "Run jenkins script"
+  jenkins_script:
+    url: "http://{{ ansible_host }}:8080/"
+    user: "{{ jenkins_admin_user }}"
+    password: "{{ jenkins_admin_pass }}"  
+    script: |
+      print("hello world!")

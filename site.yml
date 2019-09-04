@@ -4,4 +4,5 @@
   roles:
     - { role: "jenkins-install",           tags: "role_jenkins-install" }
     - { role: "jenkins-plugin-test",       tags: "role_jenkins-plugin-test" }
+    - { role: "jenkins-script-test",       tags: "role_jenkins-script-test" }
   become: yes
