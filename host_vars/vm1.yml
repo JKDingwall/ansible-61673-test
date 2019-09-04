@@ -1,0 +1,3 @@
+ansible_host: vm1.example.com
+
+jenkins_pin: 2.176.3

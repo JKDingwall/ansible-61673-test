@@ -1,0 +1,3 @@
+jenkins_admin_user: "admin"
+jenkins_admin_pass: "oranges"
+jenkins_admin_hash: "#jbcrypt:$2a$10$NnxpYA2XIYiJM3ZSIicCGOTBuVWHKK0a92PjXWdL.82D35j.TNS3K"

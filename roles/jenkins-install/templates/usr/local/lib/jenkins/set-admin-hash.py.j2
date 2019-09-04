@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+# Set the admin hash in the ansible configuration
+
+import lxml
+import os
+
+from lxml import etree
+
+JENKINS_HOME = "/var/lib/jenkins"
+USERS_XML = os.path.join(JENKINS_HOME, "users/users.xml")
+ADMIN_XPATH = "//string[starts-with(text(), '{{ jenkins_admin_user }}_')]/text()"
+HASH_XPATH = "//passwordHash"
+ADMIN_HASH = "{{ jenkins_admin_hash }}"
+
+if __name__ == "__main__":
+    response = "OK"
+
+    with open(USERS_XML, "rb") as xmlfp:
+        users = lxml.etree.parse(xmlfp)
+
+    admin_id = users.xpath(ADMIN_XPATH)[0]
+    admin_xml = os.path.join(JENKINS_HOME, "users", admin_id, "config.xml")
+
+    with open(admin_xml, "rb") as xmlfp:
+        admin = lxml.etree.parse(xmlfp)
+
+    if admin.xpath("{}/text()".format(HASH_XPATH))[0] != ADMIN_HASH:
+        admin.xpath(HASH_XPATH)[0].text = ADMIN_HASH
+        with open(admin_xml, "wb") as xmlfp:
+            xmlfp.write(lxml.etree.tostring(admin, pretty_print=True))
+        response = "MODIFIED"
+
+    print(response)
