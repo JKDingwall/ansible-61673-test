@@ -1,0 +1,28 @@
+# These plugins will be installed/updated to latest verions
+- name: "Install Jenkins plugins"
+  jenkins_plugin:
+    owner: jenkins  
+    group: jenkins
+    name: "{{ item }}"
+    url: "http://{{ ansible_host }}:8080/"
+    url_username: "{{ jenkins_admin_user }}"
+    url_password: "{{ jenkins_admin_pass }}"  
+    force_basic_auth: yes
+  with_items:
+    - ansicolor
+    - build-name-setter
+    - configuration-as-code
+    - configuration-as-code-support
+    - discard-old-build
+    - hidden-parameter
+    - lockable-resources
+    - naginator
+    - node-sharing-executor
+    - nodelabelparameter
+    - parameter-separator
+    - rebuild
+    - rundeck
+    - uno-choice
+    - workflow-aggregator
+  notify:
+    - restart-jenkins

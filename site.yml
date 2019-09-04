@@ -3,4 +3,5 @@
   force_handlers: yes
   roles:
     - { role: "jenkins-install",           tags: "role_jenkins-install" }
+    - { role: "jenkins-plugin-test",       tags: "role_jenkins-plugin-test" }
   become: yes
